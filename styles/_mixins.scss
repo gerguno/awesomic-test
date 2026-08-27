@@ -4,6 +4,10 @@
   }
 }
 
+@mixin hover-transition($property) {
+  transition: $property var(--transition);
+}
+
 @mixin focus-ring {
   outline: none;
   box-shadow: 0 0 0 3px var(--color-blue-9);
@@ -12,7 +16,6 @@
 @mixin button-reset {
   appearance: none;
   margin: 0;
-  font: inherit;
   color: inherit;
   cursor: pointer;
 }

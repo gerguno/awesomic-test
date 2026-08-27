@@ -9,6 +9,7 @@
   min-height: 560px;
   padding: var(--space-l);
   background: var(--color-sidebar);
+  transition: width var(--transition);
 }
 
 .expanded {
@@ -16,7 +17,7 @@
 }
 
 .collapsed {
-  width: 88px;
+  width: 84px;
   align-items: center;
 }
 
@@ -35,7 +36,7 @@
 }
 
 .expanded .nav {
-  padding: 0 2px;
+  padding: 0 var(--space-2xs);
 }
 
 .collapsed .nav {
@@ -45,12 +46,7 @@
 .toggle {
   position: absolute;
   top: 50%;
-  right: -16px;
+  right: calc(var(--space-l) * -1);
   transform: translateY(-50%);
   z-index: 1;
-}
-
-.collapsed .toggle {
-  right: auto;
-  left: 72px;
 }

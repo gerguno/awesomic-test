@@ -18,13 +18,13 @@
 }
 
 .md {
-  width: 40px;
-  height: 40px;
+  width: var(--space-6xl);
+  height: var(--space-6xl);
 }
 
 .sm {
-  width: 28px;
-  height: 28px;
+  width: var(--space-3xl);
+  height: var(--space-3xl);
 }
 
 .initials {

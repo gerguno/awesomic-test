@@ -5,17 +5,17 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 48px;
+  min-height: var(--space-8xl);
   padding-right: var(--space-m);
   background: var(--color-background-muted);
   border: 1px solid var(--color-border);
-  border-top-left-radius: 12px;
+  border-top-left-radius: var(--space-m);
 }
 
 .list {
   display: flex;
   align-items: stretch;
-  height: 48px;
+  height: var(--space-8xl);
 }
 
 .add {
@@ -23,15 +23,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: var(--space-8xl);
+  height: var(--space-8xl);
   margin-right: -1px;
   border: 1px solid var(--color-border);
   background: var(--color-background-muted);
   color: var(--color-secondary);
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: var(--space-l);
+    height: var(--space-l);
   }
 }

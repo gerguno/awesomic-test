@@ -9,14 +9,14 @@
 
 .expanded {
   width: 216px;
-  padding: 8px;
-  border-radius: 16px;
+  padding: var(--space-s);
+  border-radius: var(--space-l);
   gap: var(--space-s);
 }
 
 .collapsed {
-  width: 48px;
-  height: 48px;
+  width: var(--space-8xl);
+  height: var(--space-8xl);
   padding: var(--space-m) 14px;
   border-radius: 10px;
   justify-content: center;
@@ -50,8 +50,8 @@
 
 .chevron {
   display: flex;
-  width: 16px;
-  height: 16px;
+  width: var(--space-l);
+  height: var(--space-l);
   overflow: hidden;
 
   svg {

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <style>
+    .tile { fill: #f7f9f8; } /* color-sidebar */
+    .mark { fill: #1a211e; } /* color-foreground */
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #171918; }
+      .mark { fill: #ffffff; }
+    }
+  </style>
+  <rect class="tile" width="32" height="32" rx="6" />
+  <g transform="translate(4.394 4) scale(0.857142857)">
+    <path class="mark" d="M2.625 2.625H6.125V25.375H2.625V2.625Z" />
+    <path class="mark" d="M7 7.875H10.5V19.25H7V7.875Z" />
+    <path class="mark" d="M12.2051 14H15.7051V25.375H12.2051V14Z" />
+    <path class="mark" d="M16.625 7.875H20.125V19.25H16.625V7.875Z" />
+    <path class="mark" d="M20.9551 2.625H24.4551V25.375H20.9551V2.625Z" />
+  </g>
+</svg>

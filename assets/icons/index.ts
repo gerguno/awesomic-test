@@ -28,6 +28,7 @@ import { LineChartIcon } from "./LineChart";
 import { ChartIcon } from "./Chart";
 import { InsightIcon } from "./Insight";
 import { LogoSymbolIcon } from "./LogoSymbol";
+import { LogoWordmarkIcon } from "./LogoWordmark";
 
 export const iconRegistry: Record<string, ComponentType<IconRenderProps>> = {
   plus: PlusIcon,
@@ -57,6 +58,7 @@ export const iconRegistry: Record<string, ComponentType<IconRenderProps>> = {
   chart: ChartIcon,
   insight: InsightIcon,
   logoSymbol: LogoSymbolIcon,
+  logoWordmark: LogoWordmarkIcon,
 };
 
 export type IconRegistryName = keyof typeof iconRegistry;

@@ -2,20 +2,41 @@
 
 .root {
   @include button-reset;
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  padding: 0 48px;
+  height: var(--space-8xl);
+  padding: 0 var(--space-8xl);
   border: 1px solid var(--color-border);
   background: var(--color-background-muted);
   color: var(--color-secondary);
   margin-right: -1px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    background: var(--color-hover-dark);
+    @include hover-transition(opacity);
+  }
+
+  @include hover-supported {
+    &:hover:not(:disabled)::after {
+      opacity: 1;
+    }
+  }
 }
 
 .active {
   background: var(--color-background);
   color: var(--color-foreground);
   border-bottom-color: transparent;
-  border-top-left-radius: 12px;
+  border-top-left-radius: var(--space-m);
 }

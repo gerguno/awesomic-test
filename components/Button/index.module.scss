@@ -2,14 +2,32 @@
 
 .root {
   @include button-reset;
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-s);
-  border-radius: 8px;
+  border-radius: var(--space-s);
   border: 1px solid transparent;
   white-space: nowrap;
   overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    @include hover-transition(opacity);
+  }
+
+  @include hover-supported {
+    &:hover:not(:disabled)::after {
+      opacity: 1;
+    }
+  }
 
   &:focus-visible {
     @include focus-ring;
@@ -24,6 +42,10 @@
   background: var(--color-foreground);
   color: var(--color-background);
 
+  &::after {
+    background: var(--color-hover-light);
+  }
+
   &:disabled {
     background: var(--color-sidebar);
     color: var(--color-border);
@@ -35,6 +57,10 @@
   color: var(--color-foreground);
   border-color: var(--color-border);
 
+  &::after {
+    background: var(--color-hover-dark);
+  }
+
   &:disabled {
     border-color: var(--color-sidebar);
     color: var(--color-border);
@@ -42,13 +68,13 @@
 }
 
 .l {
-  height: 40px;
+  height: var(--space-6xl);
   padding: var(--space-s) var(--space-m);
 }
 
 .m {
-  width: 32px;
-  height: 32px;
+  width: var(--space-4xl);
+  height: var(--space-4xl);
   padding: 0;
 }
 

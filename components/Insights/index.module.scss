@@ -11,7 +11,7 @@
   overflow: hidden;
   background: var(--color-background);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--space-l);
 }
 
 .body {
@@ -55,8 +55,8 @@
 }
 
 .toolBtn.toolBtn {
-  width: 40px;
-  height: 40px;
+  width: var(--space-6xl);
+  height: var(--space-6xl);
 }
 
 .stepper {
@@ -64,10 +64,10 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-l);
-  height: 40px;
+  height: var(--space-6xl);
   padding: 0 11px;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--space-s);
   background: var(--color-background);
 }
 
@@ -124,7 +124,7 @@
 
 .explain {
   margin-top: var(--space-l);
-  height: 40px;
+  height: var(--space-6xl);
   gap: 6px;
 }
 
@@ -137,7 +137,7 @@
 .leraGhost {
   display: flex;
   width: 11px;
-  height: 12px;
+  height: var(--space-m);
   color: var(--color-foreground);
 
   svg {
@@ -163,7 +163,7 @@
   height: 218px;
   padding: var(--space-2xl) var(--space-l) var(--space-l);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--space-l);
   background: var(--color-background);
   box-shadow:
     0 31px 9px rgba(88, 88, 88, 0.02),
@@ -209,7 +209,7 @@
 .bars {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2xs);
   width: 100%;
 }
 
@@ -217,7 +217,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-s);
-  height: 16px;
+  height: var(--space-l);
   width: 100%;
 }
 
@@ -226,14 +226,14 @@
   flex: 1;
   min-width: 0;
   height: 3px;
-  border-radius: 8px;
+  border-radius: var(--space-s);
   background: var(--color-border);
   overflow: hidden;
 }
 
 .fill {
   height: 100%;
-  border-radius: 8px;
+  border-radius: var(--space-s);
   background: var(--color-foreground);
 
   &[data-muted="true"] {
@@ -262,13 +262,13 @@
 }
 
 .markLg {
-  width: 32px;
-  height: 32px;
+  width: var(--space-4xl);
+  height: var(--space-4xl);
 }
 
 .markSm {
-  width: 16px;
-  height: 16px;
+  width: var(--space-l);
+  height: var(--space-l);
 }
 
 .markImg {
@@ -302,7 +302,7 @@
 }
 
 .dateMark {
-  border-radius: 4px;
+  border-radius: var(--space-xs);
   background: var(--color-crimson-border);
   overflow: hidden;
 }
@@ -320,11 +320,11 @@
 .dateMark .markLabel {
   color: var(--color-crimson-accent);
   align-items: flex-end;
-  padding-bottom: 2px;
+  padding-bottom: var(--space-2xs);
 }
 
 .gridMark {
-  border-radius: 4px;
+  border-radius: var(--space-xs);
   background: var(--color-border);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -334,13 +334,13 @@
 }
 
 .markSm.dateMark {
-  border-radius: 2px;
+  border-radius: var(--space-2xs);
 }
 
 .markSm.gridMark {
   gap: 1px;
   padding: 3px 1.5px 1.5px;
-  border-radius: 2px;
+  border-radius: var(--space-2xs);
 }
 
 .gridCell {

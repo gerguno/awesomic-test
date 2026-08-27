@@ -12,11 +12,11 @@
   height: 6px;
   padding: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--space-s);
   background: var(--color-border);
 
   &[data-active="true"] {
-    width: 16px;
+    width: var(--space-l);
     background: var(--color-foreground);
   }
 }

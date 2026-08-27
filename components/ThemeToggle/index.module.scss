@@ -5,7 +5,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
+  width: var(--space-9xl);
   height: 26px;
   padding: 0;
   position: relative;
@@ -21,22 +21,22 @@
 
 .thumb {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  width: var(--space-xl);
+  height: var(--space-xl);
   border-radius: 50%;
   background: #ffffff;
   border: 1px solid #d7dad9;
-  transition: transform 0.16s ease;
+  transition: transform var(--transition);
   z-index: 1;
 }
 
 .icon {
   position: absolute;
   top: 5px;
-  width: 16px;
-  height: 16px;
+  width: var(--space-l);
+  height: var(--space-l);
   display: flex;
   color: #8d8d86;
   overflow: hidden;
@@ -52,7 +52,7 @@
 }
 
 .moon {
-  left: 4px;
+  left: var(--space-xs);
   display: none;
   color: #d7dad9;
 }

@@ -411,8 +411,8 @@
 
   // FONTS
   --font-heading: "P22 Mackinac", Georgia, "Times New Roman", serif;
-  --font-body: "Circular XX", Helvetica, Arial, sans-serif;
-  --font-mono: "Circular XX Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-body: "CXX", Helvetica, Arial, sans-serif;
+  --font-mono: "CXXM", ui-monospace, SFMono-Regular, monospace;
 
   // SPACES
   --space-2xs: 2px;
@@ -438,6 +438,9 @@
   --space-16xl: 80px;
   --space-17xl: 84px;
 
+  // MOTION
+  --transition: 0.3s ease;
+
   //////////////////////////////
   // SEMANTIC
   //////////////////////////////
@@ -449,7 +452,8 @@
   --color-border: var(--color-sage-6);
   --color-secondary: var(--color-sage-10);
   --color-foreground: var(--color-black);
-  --color-hover: #1a211e12;
+  --color-hover-dark: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  --color-hover-light: color-mix(in srgb, var(--color-background) 10%, transparent);
   --color-red-background: var(--color-tomato-2);
   --color-red-muted: var(--color-tomato-4);
   --color-red-border: var(--color-tomato-6);

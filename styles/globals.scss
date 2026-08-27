@@ -18,7 +18,7 @@ body {
 }
 
 body {
-  font-family: "Circular XX", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-weight: 450;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -39,8 +39,9 @@ p {
 
 button,
 input,
-textarea {
-  font-family: inherit;
+textarea,
+select {
+  font: inherit;
 }
 
 a {

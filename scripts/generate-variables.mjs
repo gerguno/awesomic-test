@@ -52,7 +52,8 @@ const semantic = [
   ["border", "var(--color-sage-6)"],
   ["secondary", "var(--color-sage-10)"],
   ["foreground", "var(--color-black)"],
-  ["hover", "#1a211e12"],
+  ["hover-dark", "color-mix(in srgb, var(--color-foreground) 5%, transparent)"],
+  ["hover-light", "color-mix(in srgb, var(--color-background) 10%, transparent)"],
   ["red-background", "var(--color-tomato-2)"],
   ["red-muted", "var(--color-tomato-4)"],
   ["red-border", "var(--color-tomato-6)"],
@@ -106,11 +107,14 @@ ${atomicBlock("light")}  --color-black: var(--color-sage-12);
 
   // FONTS
   --font-heading: "P22 Mackinac", Georgia, "Times New Roman", serif;
-  --font-body: "Circular XX", Helvetica, Arial, sans-serif;
-  --font-mono: "Circular XX Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-body: "CXX", Helvetica, Arial, sans-serif;
+  --font-mono: "CXXM", ui-monospace, SFMono-Regular, monospace;
 
   // SPACES
 ${spaces.map(([name, value]) => `  --space-${name}: ${value};`).join("\n")}
+
+  // MOTION
+  --transition: 0.3s ease;
 
   //////////////////////////////
   // SEMANTIC
