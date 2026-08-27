@@ -1,0 +1,39 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-foreground);
+}
+
+.expanded {
+  gap: var(--space-m);
+  padding: var(--space-m);
+}
+
+.collapsed {
+  width: 56px;
+  height: 56px;
+  justify-content: center;
+}
+
+.mark {
+  display: flex;
+  width: 27px;
+  height: 28px;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.wordmark {
+  font-family: "CXX", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

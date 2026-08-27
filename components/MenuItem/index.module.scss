@@ -1,0 +1,66 @@
+@use "../../styles/mixins" as *;
+
+.root {
+  @include button-reset;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-foreground);
+  text-align: left;
+
+  @include hover-supported {
+    &:hover:not(:disabled) {
+      background: var(--color-hover);
+    }
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    background: var(--color-background);
+  }
+}
+
+.expanded {
+  width: 100%;
+  height: 40px;
+  padding: var(--space-m);
+  gap: var(--space-m);
+}
+
+.collapsed {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  justify-content: center;
+}
+
+.active {
+  background: var(--color-background);
+  border-color: var(--color-border);
+
+  @include hover-supported {
+    &:hover:not(:disabled) {
+      background: var(--color-background);
+    }
+  }
+}
+
+.icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+}

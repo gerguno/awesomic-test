@@ -1,0 +1,183 @@
+@use "../../styles/mixins" as *;
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 360px;
+  min-width: 320px;
+  max-width: 432px;
+  min-height: 560px;
+  height: 100%;
+  padding: var(--space-2xl) 0 var(--space-s);
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 0 16px 16px 0;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+  padding: 0 var(--space-2xl);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.ghost {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: var(--color-foreground);
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.nameWrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.badge {
+  position: absolute;
+  top: -7px;
+  right: -29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px var(--space-xs);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-background);
+  color: var(--color-secondary);
+  box-shadow:
+    0 5px 2.5px rgba(121, 121, 121, 0.06),
+    inset 0 -3px 8px rgba(133, 133, 133, 0.06);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-m);
+  color: var(--color-secondary);
+}
+
+.action {
+  @include button-reset;
+  display: flex;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-secondary);
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-s);
+  padding: 0 var(--space-2xl);
+}
+
+.suggestion {
+  height: 40px;
+  padding: var(--space-s) var(--space-l);
+}
+
+.composer {
+  padding: 0 var(--space-s);
+}
+
+.field {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xl);
+  width: 100%;
+  height: 64px;
+  padding: var(--space-l);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-background);
+  overflow: hidden;
+}
+
+.fieldMain {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-l);
+  min-width: 0;
+}
+
+.prompt {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-foreground);
+
+  &::placeholder {
+    color: var(--color-secondary);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.chrome {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.handle {
+  @include button-reset;
+  position: absolute;
+  top: 50%;
+  left: -7px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 32px;
+  padding: 0;
+  overflow: hidden;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-foreground);
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}

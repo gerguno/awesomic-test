@@ -1,0 +1,17 @@
+// Single source of truth for breakpoints (SCSS + JS).
+// JS consumes the `:export` block via `utils/breakpointsPx.ts`.
+// Other SCSS files consume the `$bp-*` variables via `@import "./breakpoints.module"`.
+
+$bp-xs: 320px;
+$bp-s: 576px;
+$bp-m: 768px;
+$bp-l: 1050px;
+$bp-xl: 1366px;
+
+:export {
+  bpXs: #{$bp-xs};
+  bpS: #{$bp-s};
+  bpM: #{$bp-m};
+  bpL: #{$bp-l};
+  bpXl: #{$bp-xl};
+}

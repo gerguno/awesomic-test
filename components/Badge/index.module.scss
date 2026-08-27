@@ -1,0 +1,12 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: var(--space-xs);
+  border-radius: 4px;
+  background: var(--color-red);
+  color: var(--color-background);
+  white-space: nowrap;
+}

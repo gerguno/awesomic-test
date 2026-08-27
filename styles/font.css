@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "P22 Mackinac";
+  src:
+    url("/fonts/PM.woff2") format("woff2"),
+    url("/fonts/PM.woff") format("woff"),
+    url("/fonts/PM.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CXX";
+  src:
+    url("/fonts/CXX.woff2") format("woff2"),
+    url("/fonts/CXX.woff") format("woff"),
+    url("/fonts/CXX.ttf") format("truetype");
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CXXM";
+  src:
+    url("/fonts/CXXM.woff2") format("woff2"),
+    url("/fonts/CXXM.woff") format("woff"),
+    url("/fonts/CXXM.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

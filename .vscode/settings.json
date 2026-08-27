@@ -1,0 +1,4 @@
+{
+  "cssvar.files": ["styles/_variables.scss"],
+  "cssvar.ignore": ["**/node_modules/**", "**/.next/**"]
+}
