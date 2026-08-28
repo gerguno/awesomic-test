@@ -16,6 +16,7 @@ const storybookDevRewrites = [
   { source: "/stories/:path*", destination: `${STORYBOOK_ORIGIN}/stories/:path*` },
   { source: "/styles/:path*", destination: `${STORYBOOK_ORIGIN}/styles/:path*` },
   { source: "/assets/:path*", destination: `${STORYBOOK_ORIGIN}/assets/:path*` },
+  { source: "/data/:path*", destination: `${STORYBOOK_ORIGIN}/data/:path*` },
   { source: "/utils/:path*", destination: `${STORYBOOK_ORIGIN}/utils/:path*` },
   { source: "/.storybook/:path*", destination: `${STORYBOOK_ORIGIN}/.storybook/:path*` },
 ];

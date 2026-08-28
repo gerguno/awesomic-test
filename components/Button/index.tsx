@@ -12,18 +12,38 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: IconRegistryName;
+  borderless?: boolean;
   children?: ReactNode;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", size = "l", icon, className, children, type = "button", ...props }, ref) => {
+  (
+    {
+      variant = "primary",
+      size = "l",
+      icon,
+      borderless = false,
+      className,
+      children,
+      type = "button",
+      ...props
+    },
+    ref,
+  ) => {
     const iconName = icon ?? (size === "m" ? "placeholder" : undefined);
 
     return (
       <button
         ref={ref}
         type={type}
-        className={cn(styles.root, styles[variant], styles[size], size === "l" && textStyles.bodyLg, className)}
+        className={cn(
+          styles.root,
+          styles[variant],
+          styles[size],
+          borderless && styles.borderless,
+          size === "l" && textStyles.bodyLg,
+          className,
+        )}
         {...props}
       >
         {iconName ? (

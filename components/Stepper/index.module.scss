@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Doubled class outranks the Button size class regardless of stylesheet order. */
+.step.step {
+  width: var(--space-6xl);
+  height: var(--space-6xl);
+}

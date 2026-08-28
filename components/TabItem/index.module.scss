@@ -7,9 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   height: var(--space-8xl);
   padding: 0 var(--space-8xl);
-  border: 1px solid var(--color-border);
+  border: 0;
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   background: var(--color-background-muted);
   color: var(--color-secondary);
   margin-right: -1px;
@@ -38,5 +42,23 @@
   background: var(--color-background);
   color: var(--color-foreground);
   border-bottom-color: transparent;
-  border-top-left-radius: var(--space-m);
+}
+
+.iconOnly {
+  width: var(--space-8xl);
+  padding: 0;
+  color: var(--color-foreground);
+}
+
+.icon {
+  display: flex;
+  width: var(--space-l);
+  height: var(--space-l);
+  overflow: hidden;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }

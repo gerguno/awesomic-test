@@ -1,20 +1,19 @@
 "use client";
 
+import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import cn from "classnames";
 import Icon from "@/components/Icon";
 import Button from "@/components/Button";
 import textStyles from "@/styles/typography.module.scss";
 import styles from "./index.module.scss";
 
-function GhostMark() {
-  return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden>
-      <path
-        d="M26 0V4H30V28H26V22H22V28H18V22H14V28H10V22H6V28H0V4H6V0H26ZM24 12V8H20V12H14V8H10V12H24Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
+const MIN_WIDTH = 320;
+const MAX_WIDTH = 432;
+const DEFAULT_WIDTH = 360;
+const WIDTH_STEP = 16;
+
+function clampWidth(value: number) {
+  return Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, Math.round(value)));
 }
 
 export interface LeraProps {
@@ -30,12 +29,68 @@ export default function Lera({
   onClose,
   onCollapse,
 }: LeraProps) {
+  const [width, setWidth] = useState(DEFAULT_WIDTH);
+  const [dragging, setDragging] = useState(false);
+  const dragRef = useRef<{ startX: number; startWidth: number } | null>(null);
+
+  useEffect(() => {
+    if (!dragging) return;
+
+    const { body } = document;
+    const cursor = body.style.cursor;
+    const userSelect = body.style.userSelect;
+    body.style.cursor = "col-resize";
+    body.style.userSelect = "none";
+
+    return () => {
+      body.style.cursor = cursor;
+      body.style.userSelect = userSelect;
+    };
+  }, [dragging]);
+
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = { startX: event.clientX, startWidth: width };
+    setDragging(true);
+  };
+
+  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!dragRef.current) return;
+    const delta = dragRef.current.startX - event.clientX;
+    setWidth(clampWidth(dragRef.current.startWidth + delta));
+  };
+
+  const stopDragging = (event: PointerEvent<HTMLDivElement>) => {
+    dragRef.current = null;
+    setDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      setWidth((current) => clampWidth(current + WIDTH_STEP));
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      setWidth((current) => clampWidth(current - WIDTH_STEP));
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      setWidth(MAX_WIDTH);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      setWidth(MIN_WIDTH);
+    }
+  };
+
   return (
-    <aside className={cn(styles.root, className)}>
+    <aside className={cn(styles.root, className)} style={{ width }}>
       <div className={styles.message}>
         <div className={styles.identity}>
           <span className={styles.ghost}>
-            <GhostMark />
+            <Icon name="ghost" width={30} height={30} aria-hidden />
           </span>
           <div className={styles.nameWrap}>
             <p className={textStyles.headingMd}>Lera</p>
@@ -72,12 +127,26 @@ export default function Lera({
         </div>
       </div>
       <div className={styles.chrome}>
-        <Button variant="secondary" size="m" icon="minus" aria-label="Minimize" />
+        <Button variant="secondary" size="m" icon="minus" aria-label="Minimize" onClick={onCollapse} />
         <Button variant="secondary" size="m" icon="close" aria-label="Close" onClick={onClose} />
       </div>
-      <button type="button" className={styles.handle} aria-label="Collapse assistant" onClick={onCollapse}>
-        <Icon name="collapse" width={16} height={16} />
-      </button>
+      <div
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize assistant"
+        aria-valuenow={width}
+        aria-valuemin={MIN_WIDTH}
+        aria-valuemax={MAX_WIDTH}
+        tabIndex={0}
+        className={cn(styles.handle, dragging && styles.dragging)}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={stopDragging}
+        onPointerCancel={stopDragging}
+        onKeyDown={onKeyDown}
+      >
+        <Icon name="grip" width={16} height={16} aria-hidden />
+      </div>
     </aside>
   );
 }

@@ -2,11 +2,15 @@
 
 /* eslint-disable @next/next/no-img-element */
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import cn from "classnames";
 import Icon from "@/components/Icon";
 import Button from "@/components/Button";
+import CardHeader from "@/components/CardHeader";
 import Pager from "@/components/Pager";
+import Stepper from "@/components/Stepper";
+import { type QuickAction } from "@/components/QuickActions";
 import textStyles from "@/styles/typography.module.scss";
 import styles from "./index.module.scss";
 
@@ -69,26 +73,28 @@ const VARIANTS: Record<InsightsVariant, InsightCopy> = {
 };
 
 const ORDER: InsightsVariant[] = ["one", "two", "three"];
+const AUTO_MS = 5000;
 
-function GhostMark() {
-  return (
-    <svg width="11" height="12" viewBox="0 0 30 30" fill="none" aria-hidden>
-      <path
-        d="M26 0V4H30V28H26V22H22V28H18V22H14V28H10V22H6V28H0V4H6V0H26ZM24 12V8H20V12H14V8H10V12H24Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
+const HEADER_ACTIONS: QuickAction[] = [
+  { id: "move", icon: "drag", label: "Move card" },
+  { id: "more", icon: "more", label: "More" },
+];
 
 function Mark({ name, size }: { name: Bar["mark"]; size: "lg" | "sm" }) {
   const box = cn(styles.mark, size === "lg" ? styles.markLg : styles.markSm);
   const typeClass = size === "sm" ? textStyles.monoMd : textStyles.monoLg;
+  const px = size === "lg" ? 32 : 16;
 
   if (name === "apple") {
     return (
       <span className={box}>
-        <img className={styles.markImg} src="/images/apple-mail.png" alt="" width={size === "lg" ? 32 : 16} height={size === "lg" ? 32 : 16} />
+        <img
+          className={styles.markImg}
+          src="/images/apple-mail.png"
+          alt=""
+          width={px}
+          height={px}
+        />
       </span>
     );
   }
@@ -96,7 +102,13 @@ function Mark({ name, size }: { name: Bar["mark"]; size: "lg" | "sm" }) {
   if (name === "gmail") {
     return (
       <span className={box}>
-        <img className={styles.markImg} src="/images/gmail.svg" alt="" width={size === "lg" ? 29 : 14} height={size === "lg" ? 22 : 11} />
+        <Icon
+          name="gmail"
+          className={styles.markLogo}
+          width={size === "lg" ? 29 : 14}
+          height={size === "lg" ? 22 : 11}
+          aria-hidden
+        />
       </span>
     );
   }
@@ -104,33 +116,44 @@ function Mark({ name, size }: { name: Bar["mark"]; size: "lg" | "sm" }) {
   if (name === "ac" || name === "wd") {
     return (
       <span className={box}>
-        <img
+        <Icon
+          name={name === "ac" ? "campaignAc" : "campaignWd"}
           className={styles.markImg}
-          src={name === "ac" ? "/images/campaign-ac.svg" : "/images/campaign-wd.svg"}
-          alt=""
+          width={px}
+          height={px}
+          aria-hidden
         />
-        <span className={cn(styles.markLabel, typeClass, name === "ac" ? styles.acLabel : styles.wdLabel)}>
+        <span
+          className={cn(
+            styles.markLabel,
+            typeClass,
+            name === "ac" ? styles.acLabel : styles.wdLabel,
+          )}
+        >
           {name === "ac" ? "AC" : "WD"}
         </span>
       </span>
     );
   }
 
-  if (name === "date") {
+  if (name === "date" || name === "grid") {
     return (
-      <span className={cn(box, styles.dateMark)}>
-        <span className={cn(styles.markLabel, typeClass)}>18</span>
+      <span className={box}>
+        <Icon
+          name={name === "date" ? "calendarDate" : "calendarGrid"}
+          className={styles.markImg}
+          width={px}
+          height={px}
+          aria-hidden
+        />
+        {name === "date" ? (
+          <span className={cn(styles.markLabel, typeClass, styles.dateLabel)}>18</span>
+        ) : null}
       </span>
     );
   }
 
-  return (
-    <span className={cn(box, styles.gridMark)}>
-      {Array.from({ length: 6 }, (_, i) => (
-        <span key={i} className={styles.gridCell} />
-      ))}
-    </span>
-  );
+  return null;
 }
 
 export interface InsightsProps {
@@ -141,89 +164,121 @@ export interface InsightsProps {
 
 export default function Insights({ variant, className, onVariantChange }: InsightsProps) {
   const [uncontrolled, setUncontrolled] = useState<InsightsVariant>("one");
+  const [playing, setPlaying] = useState(true);
+  const reduceMotion = useReducedMotion();
   const current = variant ?? uncontrolled;
   const data = VARIANTS[current];
   const page = ORDER.indexOf(current);
+  const fadeMs = reduceMotion ? 0 : 0.3;
 
-  const go = (nextIndex: number) => {
-    const next = ORDER[(nextIndex + ORDER.length) % ORDER.length];
-    if (variant === undefined) setUncontrolled(next);
-    onVariantChange?.(next);
-  };
+  const go = useCallback(
+    (nextIndex: number) => {
+      const next = ORDER[(nextIndex + ORDER.length) % ORDER.length];
+      if (variant === undefined) setUncontrolled(next);
+      onVariantChange?.(next);
+    },
+    [onVariantChange, variant],
+  );
+
+  const autoplay = playing && variant === undefined;
 
   return (
     <article className={cn(styles.root, className)}>
       <div className={styles.body}>
-        <header className={styles.header}>
-          <div className={styles.title}>
-            <span className={styles.titleIcon}>
-              <Icon name="insight" width={22} height={22} />
-            </span>
-            <p className={textStyles.bodyXl}>Insights</p>
-          </div>
-          <div className={styles.tools}>
-            <div className={styles.stepper}>
-              <button type="button" className={styles.step} aria-label="Previous insight" onClick={() => go(page - 1)}>
-                <Icon name="arrowLeft" width={16} height={16} />
-              </button>
-              <button type="button" className={styles.step} aria-label="Next insight" onClick={() => go(page + 1)}>
-                <Icon name="arrowRight" width={16} height={16} />
-              </button>
-            </div>
-            <Button variant="secondary" size="m" icon="expand" className={styles.toolBtn} aria-label="Expand" />
-            <Button variant="secondary" size="m" icon="more" className={styles.toolBtn} aria-label="More" />
-          </div>
-        </header>
+        <CardHeader icon="insight" title="Insights" actions={HEADER_ACTIONS}>
+          <Stepper
+            prevLabel="Previous insight"
+            nextLabel="Next insight"
+            onPrev={() => go(page - 1)}
+            onNext={() => go(page + 1)}
+          />
+        </CardHeader>
 
-        <div className={cn(styles.columns, styles.labels, textStyles.monoMd)}>
-          <p>Change</p>
-          <p>Reason of change</p>
-        </div>
-
-        <div className={cn(styles.columns, styles.content)}>
-          <div className={styles.copy}>
-            <p className={cn(styles.headline, textStyles.bodyXl)}>{data.headline}</p>
-            <p className={cn(styles.bodyText, textStyles.bodyLg)}>{data.body}</p>
-            <Button variant="secondary" size="l" className={styles.explain}>
-              Explain with
-              <span className={styles.lera}>
-                <span className={styles.leraGhost}>
-                  <GhostMark />
-                </span>
-                <span className={styles.leraName}>Lera</span>
-              </span>
-            </Button>
+        <div className={styles.group}>
+          <div className={cn(styles.columns, styles.labels, textStyles.monoMd)}>
+            <p>Change</p>
+            <p>Reason of change</p>
           </div>
 
-          <div className={styles.card}>
-            <div className={styles.pair}>
-              <Mark name={data.left} size="lg" />
-              <span className={styles.slash}>/</span>
-              <Mark name={data.right} size="lg" />
-            </div>
-            <p className={cn(styles.summary, textStyles.bodyXl)}>{data.summary}</p>
-            <div className={styles.metric}>
-              <p className={cn(styles.metricLabel, textStyles.bodyMd)}>{data.metric}</p>
-              <div className={styles.bars}>
-                {data.bars.map((bar) => (
-                  <div key={bar.mark} className={styles.row}>
-                    <Mark name={bar.mark} size="sm" />
-                    <div className={styles.track}>
-                      <div className={styles.fill} data-muted={bar.muted} style={{ width: bar.width }} />
-                    </div>
-                    <span className={cn(styles.value, textStyles.monoLg)} data-muted={bar.muted}>
-                      {bar.value}
-                    </span>
+          <div className={styles.stage}>
+            <AnimatePresence initial={false} mode="sync">
+              <motion.div
+                key={current}
+                className={cn(styles.columns, styles.content, styles.stageItem)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: fadeMs, ease: "easeInOut" }}
+              >
+                <div className={styles.copy}>
+                  <div className={styles.copyInner}>
+                    <p className={cn(styles.headline, textStyles.bodyXl)}>{data.headline}</p>
+                    <p className={cn(styles.bodyText, textStyles.bodyLg)}>{data.body}</p>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <Button variant="secondary" size="l" className={styles.explain}>
+                    Explain with
+                    <span className={styles.lera}>
+                      <span className={styles.leraGhost}>
+                        <Icon name="ghost" width={11} height={12} aria-hidden />
+                      </span>
+                      <span className={styles.leraName}>Lera</span>
+                    </span>
+                  </Button>
+                </div>
+
+                <div className={styles.card}>
+                  <div className={styles.pair}>
+                    <Mark name={data.left} size="lg" />
+                    <span className={styles.slash}>/</span>
+                    <Mark name={data.right} size="lg" />
+                  </div>
+                  <p className={cn(styles.summary, textStyles.bodyXl)}>{data.summary}</p>
+                  <div className={styles.metric}>
+                    <p className={cn(styles.metricLabel, textStyles.bodyMd)}>{data.metric}</p>
+                    <div className={styles.bars}>
+                      {data.bars.map((bar) => (
+                        <div key={bar.mark} className={styles.row}>
+                          <Mark name={bar.mark} size="sm" />
+                          <div className={styles.track}>
+                            <div
+                              className={styles.fill}
+                              data-muted={bar.muted}
+                              style={{ width: bar.width }}
+                            />
+                          </div>
+                          <span className={cn(styles.value, textStyles.monoLg)} data-muted={bar.muted}>
+                            {bar.value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      </div>
 
-      <div className={styles.pager}>
-        <Pager count={3} index={page} onChange={go} />
+        <div className={styles.pager}>
+          <Pager
+            count={ORDER.length}
+            index={page}
+            duration={variant === undefined ? AUTO_MS : undefined}
+            playing={autoplay}
+            onChange={go}
+            onComplete={() => go(page + 1)}
+          />
+        </div>
+
+        <button
+          type="button"
+          className={styles.playback}
+          aria-label={playing ? "Pause insights" : "Play insights"}
+          aria-pressed={playing}
+          onClick={() => setPlaying((prev) => !prev)}
+        >
+          <Icon name={playing ? "pause" : "playSquare"} width={18} height={18} />
+        </button>
       </div>
     </article>
   );

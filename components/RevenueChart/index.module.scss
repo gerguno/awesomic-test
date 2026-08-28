@@ -1,0 +1,177 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  height: 400px;
+  overflow: hidden;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--space-l);
+}
+
+.stage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 var(--space-xl);
+}
+
+.plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: visible;
+}
+
+.overlay {
+  position: absolute;
+  top: 36px;
+  right: 8px;
+  bottom: 4px;
+  left: 8px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.fade {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  width: 109px;
+  height: calc(100% - 40px);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--color-background) 18%,
+    color-mix(in srgb, var(--color-background) 0%, transparent) 89%
+  );
+  opacity: 0.85;
+}
+
+.yAxis {
+  position: absolute;
+  top: 36px;
+  left: 6px;
+  bottom: 8px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  color: var(--color-secondary);
+}
+
+.callout {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  max-width: min(100%, 240px);
+  padding: 3px 6px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--space-xs);
+  pointer-events: none;
+  white-space: nowrap;
+  transition:
+    left 0.6s ease-out,
+    top 0.6s ease-out;
+}
+
+.callout[data-align="center"] {
+  transform: translate(-50%, calc(-100% - 16px));
+}
+
+.callout[data-align="start"] {
+  transform: translate(0, calc(-100% - 16px));
+}
+
+.callout[data-align="end"] {
+  transform: translate(-100%, calc(-100% - 16px));
+}
+
+.callout[data-side="below"][data-align="center"] {
+  transform: translate(-50%, 16px);
+}
+
+.callout[data-side="below"][data-align="start"] {
+  transform: translate(0, 16px);
+}
+
+.callout[data-side="below"][data-align="end"] {
+  transform: translate(-100%, 16px);
+}
+
+.xAxis {
+  position: relative;
+  flex-shrink: 0;
+  height: 28px;
+  margin: 4px 8px 0;
+}
+
+.xTick {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--color-secondary);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.xTick[data-align="center"] {
+  transform: translateX(-50%);
+}
+
+.xTick[data-align="end"] {
+  transform: translateX(-100%);
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  flex-shrink: 0;
+  margin: var(--space-m) var(--space-xl) var(--space-xl);
+  overflow: hidden;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--space-s);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: var(--space-s);
+  color: var(--color-foreground);
+  background: var(--color-background);
+}
+
+.swatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+}
+
+.current {
+  border: 1.2px solid var(--color-purple);
+  border-radius: 50%;
+}
+
+.previous {
+  border: 1.2px dashed var(--color-secondary);
+  border-radius: 50%;
+}
+
+.outlier {
+  border: 1.2px solid var(--color-red);
+  border-radius: 50%;
+}

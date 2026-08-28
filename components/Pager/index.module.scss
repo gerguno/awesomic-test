@@ -4,19 +4,71 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  --pager-duration: 5s;
+  --pager-play: running;
+  --pager-dot: 6px;
 }
 
 .dot {
   @include button-reset;
-  width: 6px;
-  height: 6px;
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: var(--pager-dot);
+  height: var(--pager-dot);
   padding: 0;
   border: 0;
-  border-radius: var(--space-s);
+  overflow: hidden;
+  border-radius: 999px;
   background: var(--color-border);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
   &[data-active="true"] {
     width: var(--space-l);
-    background: var(--color-foreground);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  min-width: 0;
+  background: var(--color-foreground);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.dot[data-active="true"] .fill {
+  width: 100%;
+}
+
+.dot[data-active="true"][data-timed="true"] .fill {
+  width: var(--pager-dot);
+  animation: pager-fill var(--pager-duration) linear forwards;
+  animation-play-state: var(--pager-play);
+}
+
+@keyframes pager-fill {
+  from {
+    width: var(--pager-dot);
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: none;
+  }
+
+  .dot[data-active="true"][data-timed="true"] .fill {
+    animation: none;
+    width: 100%;
   }
 }

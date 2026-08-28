@@ -67,6 +67,15 @@
   }
 }
 
+.borderless {
+  border-color: transparent;
+  background: transparent;
+
+  &:disabled {
+    border-color: transparent;
+  }
+}
+
 .l {
   height: var(--space-6xl);
   padding: var(--space-s) var(--space-m);

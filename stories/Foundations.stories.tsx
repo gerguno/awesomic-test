@@ -88,7 +88,7 @@ export const Typography: Story = {
           <p
             style={{
               marginBottom: 8,
-              fontFamily: "CXXM, ui-monospace, monospace",
+              fontFamily: "var(--font-mono)",
               fontSize: 12,
               color: "var(--color-secondary)",
             }}
@@ -126,7 +126,7 @@ export const Color: Story = {
             style={{
               margin: 0,
               padding: 8,
-              fontFamily: "CXXM, ui-monospace, monospace",
+              fontFamily: "var(--font-mono)",
               fontSize: 12,
               color: "var(--color-foreground)",
             }}

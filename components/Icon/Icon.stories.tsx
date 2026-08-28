@@ -49,7 +49,7 @@ export const Gallery: Story = {
           }}
         >
           <Icon name={name} />
-          <span style={{ fontFamily: "CXXM, ui-monospace, monospace", fontSize: 12 }}>{name}</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>{name}</span>
         </div>
       ))}
     </div>

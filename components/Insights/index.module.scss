@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 608px;
   height: 400px;
   overflow: hidden;
   background: var(--color-background);
@@ -15,76 +14,19 @@
 }
 
 .body {
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 22px;
   min-height: 0;
 }
 
-.header {
+.group {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-xl) 23px 0 var(--space-xl);
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-s);
-  color: var(--color-foreground);
-}
-
-.titleIcon {
-  display: flex;
-  width: 22px;
-  height: 22px;
-  overflow: hidden;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.tools {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.toolBtn.toolBtn {
-  width: var(--space-6xl);
-  height: var(--space-6xl);
-}
-
-.stepper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-l);
-  height: var(--space-6xl);
-  padding: 0 11px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--space-s);
-  background: var(--color-background);
-}
-
-.step {
-  @include button-reset;
-  display: flex;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--color-foreground);
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  min-height: 0;
 }
 
 .columns {
@@ -98,6 +40,7 @@
   border-top: 1px dashed var(--color-border);
   border-bottom: 1px dashed var(--color-border);
   padding: var(--space-s) 0;
+  margin-inline: var(--space-2xl);
   color: var(--color-secondary);
 }
 
@@ -105,25 +48,59 @@
   position: relative;
   flex: 1;
   min-height: 0;
-  align-items: start;
+  align-items: stretch;
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.stageItem {
+  position: absolute;
+  inset: 0;
 }
 
 .copy {
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  margin-bottom: var(--space-2xl);
+  gap: var(--space-l);
+}
+
+.copyInner {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   gap: var(--space-m);
+  width: 85%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .headline {
+  flex-shrink: 0;
   color: var(--color-foreground);
 }
 
 .bodyText {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   color: var(--color-secondary);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .explain {
-  margin-top: var(--space-l);
+  flex-shrink: 0;
+  align-self: flex-start;
   height: var(--space-6xl);
   gap: 6px;
 }
@@ -147,11 +124,12 @@
 }
 
 .leraName {
-  font-family: "P22 Mackinac", Georgia, "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.35;
   letter-spacing: 0.02em;
+  transform: translateY(1px);
 }
 
 .card {
@@ -160,7 +138,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 218px;
+  min-height: 0;
+  margin-bottom: var(--space-11xl);
   padding: var(--space-2xl) var(--space-l) var(--space-l);
   border: 1px solid var(--color-border);
   border-radius: var(--space-l);
@@ -189,6 +168,8 @@
   color: var(--color-foreground);
   text-align: center;
   max-width: 202px;
+  font-feature-settings: frac;
+  font-variant-numeric: diagonal-fractions;
 }
 
 .metric {
@@ -258,7 +239,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  overflow: hidden;
 }
 
 .markLg {
@@ -276,6 +256,17 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.markLogo {
+  display: block;
+  width: 28.54px;
+  height: 21.51px;
+}
+
+.markSm .markLogo {
+  width: 14.27px;
+  height: 10.75px;
 }
 
 .markSm .markLabel {
@@ -296,60 +287,60 @@
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   pointer-events: none;
 }
 
-.dateMark {
-  border-radius: var(--space-xs);
-  background: var(--color-crimson-border);
-  overflow: hidden;
+.acLabel,
+.wdLabel {
+  padding-bottom: 6px;
 }
 
-.dateMark::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 25%;
-  background: var(--color-crimson);
-}
-
-.dateMark .markLabel {
+.dateLabel {
   color: var(--color-crimson-accent);
-  align-items: flex-end;
-  padding-bottom: var(--space-2xs);
+  padding-bottom: 5px;
 }
 
-.gridMark {
-  border-radius: var(--space-xs);
-  background: var(--color-border);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 2.5px;
-  padding: 6px 2.5px 2.5px;
+.markSm .acLabel,
+.markSm .wdLabel {
+  padding-bottom: 3px;
 }
 
-.markSm.dateMark {
-  border-radius: var(--space-2xs);
-}
-
-.markSm.gridMark {
-  gap: 1px;
-  padding: 3px 1.5px 1.5px;
-  border-radius: var(--space-2xs);
-}
-
-.gridCell {
-  background: var(--color-secondary);
-  border-radius: 1px;
+.markSm .dateLabel {
+  padding-bottom: 2.5px;
 }
 
 .pager {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   padding-bottom: var(--space-2xl);
+}
+
+.playback {
+  @include button-reset;
+  position: absolute;
+  right: var(--space-xl);
+  bottom: var(--space-xl);
+  z-index: 1;
+  display: flex;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-foreground);
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
 }

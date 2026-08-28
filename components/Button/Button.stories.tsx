@@ -37,6 +37,10 @@ export const SecondaryIcon: Story = {
   args: { variant: "secondary", size: "m" },
 };
 
+export const Borderless: Story = {
+  args: { variant: "secondary", size: "m", borderless: true },
+};
+
 export const Disabled: Story = {
   args: { variant: "primary", disabled: true },
 };
@@ -65,6 +69,10 @@ export const Gallery: Story = {
         <Button variant="primary" size="m" disabled />
         <Button variant="secondary" size="m" />
         <Button variant="secondary" size="m" disabled />
+      </div>
+      <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+        <Button variant="secondary" size="m" borderless />
+        <Button variant="secondary" size="m" borderless disabled />
       </div>
     </div>
   ),

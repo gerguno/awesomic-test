@@ -1,0 +1,48 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  overflow: hidden;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &[data-tone="positive"] {
+    color: var(--color-green);
+  }
+
+  &[data-tone="negative"] {
+    color: var(--color-red);
+  }
+
+  &[data-tone="neutral"] {
+    color: var(--color-secondary);
+  }
+}
+
+.value {
+  color: var(--color-secondary);
+
+  &[data-tone="positive"] {
+    color: var(--color-green);
+  }
+
+  &[data-tone="negative"] {
+    color: var(--color-red);
+  }
+}
+
+.caption {
+  color: var(--color-secondary);
+  white-space: nowrap;
+}

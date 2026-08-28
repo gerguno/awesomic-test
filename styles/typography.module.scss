@@ -1,5 +1,5 @@
 .headingXl {
-  font-family: "P22 Mackinac", Georgia, "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: 38px;
   font-weight: 400;
   line-height: 1.2;
@@ -7,7 +7,7 @@
 }
 
 .headingLg {
-  font-family: "P22 Mackinac", Georgia, "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: 30px;
   font-weight: 400;
   line-height: 1.2;
@@ -15,7 +15,7 @@
 }
 
 .headingMd {
-  font-family: "P22 Mackinac", Georgia, "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: 24px;
   font-weight: 400;
   line-height: 1.2;
@@ -23,7 +23,7 @@
 }
 
 .bodyXl {
-  font-family: "CXX", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 450;
   line-height: 1.35;
@@ -31,7 +31,7 @@
 }
 
 .bodyLg {
-  font-family: "CXX", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 450;
   line-height: 1.35;
@@ -39,7 +39,7 @@
 }
 
 .bodyMd {
-  font-family: "CXX", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 450;
   line-height: 1.35;
@@ -47,7 +47,7 @@
 }
 
 .monoXl {
-  font-family: "CXXM", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 28px;
   font-weight: 400;
   line-height: 1.2;
@@ -55,7 +55,7 @@
 }
 
 .monoLg {
-  font-family: "CXXM", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.2;
@@ -63,7 +63,7 @@
 }
 
 .monoMd {
-  font-family: "CXXM", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
   line-height: 1.2;

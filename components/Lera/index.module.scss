@@ -162,7 +162,8 @@
   @include button-reset;
   position: absolute;
   top: 50%;
-  left: -7px;
+  left: -6px;
+  z-index: 2;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -174,10 +175,21 @@
   background: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--space-s);
-  color: var(--color-foreground);
+  color: var(--color-sage-8);
+  cursor: col-resize;
+  touch-action: none;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
 
   svg {
     width: var(--space-l);
     height: var(--space-l);
+    flex-shrink: 0;
   }
+}
+
+.dragging {
+  cursor: col-resize;
 }

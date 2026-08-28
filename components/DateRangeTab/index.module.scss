@@ -2,6 +2,8 @@
 
 .root {
   @include button-reset;
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -12,11 +14,22 @@
   border: 1px solid transparent;
   background: transparent;
   color: var(--color-secondary);
-  @include hover-transition(background);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    border-radius: inherit;
+    background: var(--color-hover-dark);
+    @include hover-transition(opacity);
+  }
 
   @include hover-supported {
-    &:hover:not(:disabled):not(.active) {
-      background: var(--color-hover-dark);
+    &:hover:not(:disabled):not(.active)::after {
+      opacity: 1;
     }
   }
 }

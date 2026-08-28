@@ -50,9 +50,9 @@ export default function Tabs({
             {tab.label}
           </TabItem>
         ))}
-        <button type="button" className={styles.add} aria-label="Add tab" onClick={onAdd}>
+        <TabItem aria-label="Add tab" onClick={onAdd}>
           <Icon name="plus" width={16} height={16} />
-        </button>
+        </TabItem>
       </div>
       <ThemeToggle />
     </div>

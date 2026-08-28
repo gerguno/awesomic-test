@@ -2,12 +2,8 @@
 
 .root {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   height: 100%;
   min-height: 560px;
-  padding: var(--space-l);
   background: var(--color-sidebar);
   transition: width var(--transition);
 }
@@ -17,6 +13,42 @@
 }
 
 .collapsed {
+  width: 84px;
+}
+
+.viewport {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  background: var(--color-sidebar);
+}
+
+.inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-l);
+}
+
+// The inner column keeps the pixel width of the state it is rendering, so the
+// content is clipped by the viewport instead of reflowing while the root animates.
+.contentExpanded {
+  width: 248px;
+}
+
+.contentCollapsed {
   width: 84px;
   align-items: center;
 }
@@ -35,11 +67,11 @@
   width: 100%;
 }
 
-.expanded .nav {
-  padding: 0 var(--space-2xs);
+.contentExpanded .nav {
+  padding: 0 6px;
 }
 
-.collapsed .nav {
+.contentCollapsed .nav {
   align-items: center;
 }
 

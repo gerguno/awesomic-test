@@ -1,7 +1,7 @@
 import { createIcon, type IconRenderProps } from "@/utils/createIcon";
 
-const WIDTH = 16;
-const HEIGHT = 16;
+const WIDTH = 8;
+const HEIGHT = 8;
 
 export const ArrowTopRightIcon = createIcon(
   ({ width = WIDTH, height = HEIGHT, ...props }: IconRenderProps) => ({
@@ -13,14 +13,14 @@ export const ArrowTopRightIcon = createIcon(
     children: (
       <>
         <path
-          d="M6.41992 5.5H10.6599V9.75"
+          d="M2.41992 1.5H6.65993V5.75"
           stroke="currentColor"
           strokeWidth="1.2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M10.66 5.5L5 11.16"
+          d="M6.66 1.5L1 7.16"
           stroke="currentColor"
           strokeWidth="1.2"
           strokeLinecap="round"

@@ -13,6 +13,13 @@ const meta = {
   argTypes: {
     variant: { control: "inline-radio", options: ["one", "two", "three"] },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: 608 }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Insights>;
 
 export default meta;

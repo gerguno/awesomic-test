@@ -2,6 +2,8 @@
 
 .root {
   @include button-reset;
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -9,11 +11,22 @@
   background: transparent;
   color: var(--color-foreground);
   text-align: left;
-  @include hover-transition(background);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    border-radius: inherit;
+    background: var(--color-hover-dark);
+    @include hover-transition(opacity);
+  }
 
   @include hover-supported {
-    &:hover:not(:disabled) {
-      background: var(--color-hover-dark);
+    &:hover:not(:disabled)::after {
+      opacity: 1;
     }
   }
 
@@ -26,7 +39,7 @@
 .expanded {
   width: 100%;
   height: var(--space-6xl);
-  padding: var(--space-m);
+  padding: var(--space-m) var(--space-m) var(--space-m) 10px;
   gap: var(--space-m);
 }
 
@@ -42,8 +55,8 @@
   border-color: var(--color-border);
 
   @include hover-supported {
-    &:hover:not(:disabled) {
-      background: var(--color-background);
+    &:hover:not(:disabled)::after {
+      opacity: 0;
     }
   }
 }
