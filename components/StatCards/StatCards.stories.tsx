@@ -1,4 +1,6 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import DateRangeTabs, { type DateRangeId } from "@/components/DateRangeTabs";
 import { buildStatMetrics, getDataset } from "@/data";
 import StatCards from "./index";
 
@@ -31,5 +33,21 @@ export const Today: Story = {
 export const Month: Story = {
   args: {
     metrics: buildStatMetrics(getDataset("month")),
+  },
+};
+
+export const Interactive: Story = {
+  args: {
+    metrics: buildStatMetrics(getDataset("week")),
+  },
+  render: function InteractiveStory() {
+    const [range, setRange] = useState<DateRangeId>("week");
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <DateRangeTabs value={range} onChange={setRange} />
+        <StatCards metrics={buildStatMetrics(getDataset(range))} />
+      </div>
+    );
   },
 };

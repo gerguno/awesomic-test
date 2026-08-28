@@ -5,9 +5,22 @@
   box-sizing: border-box;
 }
 
-*:focus,
-*:focus-visible {
-  outline-color: var(--color-iris);
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 0;
+}
+
+svg:focus,
+svg:focus-visible,
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible,
+.recharts-surface:focus,
+.recharts-surface:focus-visible {
+  outline: none;
 }
 
 html,

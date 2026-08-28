@@ -29,10 +29,6 @@
     }
   }
 
-  &:focus-visible {
-    @include focus-ring;
-  }
-
   &:disabled {
     cursor: not-allowed;
   }

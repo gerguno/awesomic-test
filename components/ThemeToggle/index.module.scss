@@ -13,10 +13,6 @@
   border-radius: 13px;
   background: #ffffff;
   flex-shrink: 0;
-
-  &:focus-visible {
-    @include focus-ring;
-  }
 }
 
 .thumb {

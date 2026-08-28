@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import cn from "classnames";
 import CardHeader from "@/components/CardHeader";
 import Delta from "@/components/Delta";
+import RollingNumber from "@/components/RollingNumber";
 import { type EngagementMetric } from "@/data";
 import { type QuickAction } from "@/components/QuickActions";
 import textStyles from "@/styles/typography.module.scss";
@@ -139,7 +140,9 @@ export default function Engagement({ metric, className }: EngagementProps) {
               transition={{ duration, ease: "easeOut" }}
             />
           </svg>
-          <p className={cn(styles.score, textStyles.monoXl)}>{metric.score}</p>
+          <p className={cn(styles.score, textStyles.monoXl)}>
+            <RollingNumber value={metric.score} />
+          </p>
         </div>
         <Delta delta={metric.delta} caption={metric.comparisonLabel} />
         <div className={styles.legend}>

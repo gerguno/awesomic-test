@@ -16,10 +16,6 @@
     border-color: var(--color-foreground);
   }
 
-  &:focus-visible {
-    @include focus-ring;
-  }
-
   &:disabled {
     opacity: 0.35;
     cursor: not-allowed;

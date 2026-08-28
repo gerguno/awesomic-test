@@ -64,8 +64,24 @@
   color: var(--color-secondary);
 }
 
+.marker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  width: 13.2px;
+  height: 13.2px;
+  background: var(--color-background);
+  border: 1.2px solid var(--color-brown);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 .callout {
   position: absolute;
+  top: 100%;
+  left: 0;
   z-index: 2;
   display: flex;
   max-width: min(100%, 240px);
@@ -75,9 +91,6 @@
   border-radius: var(--space-xs);
   pointer-events: none;
   white-space: nowrap;
-  transition:
-    left 0.6s ease-out,
-    top 0.6s ease-out;
 }
 
 .callout[data-align="center"] {
@@ -102,6 +115,35 @@
 
 .callout[data-side="below"][data-align="end"] {
   transform: translate(-100%, 16px);
+}
+
+.tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 156px;
+  padding: var(--space-s);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--space-xs);
+  pointer-events: none;
+}
+
+.tooltipLabel {
+  margin: 0;
+  color: var(--color-secondary);
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-foreground);
+}
+
+.tooltipValue {
+  margin-left: auto;
+  padding-left: var(--space-m);
 }
 
 .xAxis {
@@ -172,6 +214,6 @@
 }
 
 .outlier {
-  border: 1.2px solid var(--color-red);
+  border: 1.2px solid var(--color-brown);
   border-radius: 50%;
 }

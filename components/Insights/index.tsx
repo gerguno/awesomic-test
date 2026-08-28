@@ -2,8 +2,16 @@
 
 /* eslint-disable @next/next/no-img-element */
 
-import { useCallback, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import {
+  AnimatePresence,
+  animate,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import cn from "classnames";
 import Icon from "@/components/Icon";
 import Button from "@/components/Button";
@@ -74,6 +82,8 @@ const VARIANTS: Record<InsightsVariant, InsightCopy> = {
 
 const ORDER: InsightsVariant[] = ["one", "two", "three"];
 const AUTO_MS = 5000;
+const FILL_DURATION = 0.8;
+const FILL_EASE: [number, number, number, number] = [0.16, 0, 0.24, 1];
 
 const HEADER_ACTIONS: QuickAction[] = [
   { id: "move", icon: "drag", label: "Move card" },
@@ -156,6 +166,61 @@ function Mark({ name, size }: { name: Bar["mark"]; size: "lg" | "sm" }) {
   return null;
 }
 
+function barCap(width: string) {
+  return Number.parseFloat(width) / 100;
+}
+
+function InsightBars({
+  bars,
+  reduceMotion,
+  delay,
+}: {
+  bars: [Bar, Bar];
+  reduceMotion: boolean;
+  delay: number;
+}) {
+  const progress = useMotionValue(0);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      progress.set(1);
+      return;
+    }
+
+    progress.set(0);
+    const controls = animate(progress, 1, {
+      duration: FILL_DURATION,
+      delay,
+      ease: FILL_EASE,
+    });
+    return () => controls.stop();
+  }, [delay, progress, reduceMotion]);
+
+  return (
+    <div className={styles.bars}>
+      {bars.map((bar) => (
+        <BarRow key={bar.mark} bar={bar} progress={progress} />
+      ))}
+    </div>
+  );
+}
+
+function BarRow({ bar, progress }: { bar: Bar; progress: MotionValue<number> }) {
+  const width = useTransform(progress, (value) => `${Math.min(value, barCap(bar.width)) * 100}%`);
+
+  return (
+    <div className={styles.row}>
+      <Mark name={bar.mark} size="sm" />
+      <div className={styles.track}>
+        <motion.div className={styles.fill} data-muted={bar.muted} style={{ width }} />
+      </div>
+      <span className={cn(styles.value, textStyles.monoLg)} data-muted={bar.muted}>
+        {bar.value}
+      </span>
+    </div>
+  );
+}
+
 export interface InsightsProps {
   variant?: InsightsVariant;
   className?: string;
@@ -235,23 +300,7 @@ export default function Insights({ variant, className, onVariantChange }: Insigh
                   <p className={cn(styles.summary, textStyles.bodyXl)}>{data.summary}</p>
                   <div className={styles.metric}>
                     <p className={cn(styles.metricLabel, textStyles.bodyMd)}>{data.metric}</p>
-                    <div className={styles.bars}>
-                      {data.bars.map((bar) => (
-                        <div key={bar.mark} className={styles.row}>
-                          <Mark name={bar.mark} size="sm" />
-                          <div className={styles.track}>
-                            <div
-                              className={styles.fill}
-                              data-muted={bar.muted}
-                              style={{ width: bar.width }}
-                            />
-                          </div>
-                          <span className={cn(styles.value, textStyles.monoLg)} data-muted={bar.muted}>
-                            {bar.value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    <InsightBars bars={data.bars} reduceMotion={!!reduceMotion} delay={fadeMs} />
                   </div>
                 </div>
               </motion.div>

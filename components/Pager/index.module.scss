@@ -26,10 +26,6 @@
   &[data-active="true"] {
     width: var(--space-l);
   }
-
-  &:focus-visible {
-    @include focus-ring;
-  }
 }
 
 .fill {

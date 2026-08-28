@@ -97,10 +97,6 @@ button.item {
   background: transparent;
   color: inherit;
   cursor: pointer;
-
-  &:focus-visible {
-    @include focus-ring;
-  }
 }
 
 .item svg {
